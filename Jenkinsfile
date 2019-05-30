@@ -1,10 +1,18 @@
 #!groovy
 
 /**
- * Continuous Integration Jenkinsfile
+ * This Jenkinsfile is intended to run on https://15.146.44.13 and may fail anywhere else.
+ * It makes assumptions about plugins being installed, labels mapping to nodes that can build what is needed, etc.
  *
- *
- *
+ * This Jenkinsfile incorporates 'Git Flow' workflow for Continuous Integration
+ * to have Java installed, but some setups may have nodes that shouldn't have heavier builds running on them, so we
+ * make this explicit. "docker" would be any node with docker installed.
+ * 
+ * @author 	vinay.makam-anjaneya@hpe.com 
+ * @date 	25-03-2019
+ * @version 	Initial Commit
+ * @copyright 	HPE Confidential
+ * 
  * Setup:
  * - Configure the environment variables accordingly
  */
@@ -52,7 +60,7 @@ pipeline {
                     python3 -m venv venv
                     export PATH=${VIRTUAL_ENV}/bin:${PATH}
                     pip install --upgrade pip
-		            pip install -r requirements.txt
+		    pip install -r requirements.txt
                 """
             }
         }
@@ -60,9 +68,9 @@ pipeline {
         stage('Lint source') {
             steps {
                 sh """
-		        export PATH=${VIRTUAL_ENV}/bin:${PATH}
-		        flake8 --exclude=venv* --statistics --ignore=E305, E112, E999
-		        """
+		   export PATH=${VIRTUAL_ENV}/bin:${PATH}
+		   flake8 --exclude=venv* --statistics --ignore=E305, E112, E999
+		"""
             }
         }
 
