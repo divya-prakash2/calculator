@@ -4,9 +4,7 @@
  * This Jenkinsfile is intended to run on https://15.146.44.13 and may fail anywhere else.
  * It makes assumptions about plugins being installed, labels mapping to nodes that can build what is needed, etc.
  *
- * This Jenkinsfile incorporates 'Git Flow' workflow for Continuous Integration
- * to have Java installed, but some setups may have nodes that shouldn't have heavier builds running on them, so we
- * make this explicit. "docker" would be any node with docker installed.
+ * This Jenkinsfile incorporates 'Git Flow' workflow for Continuous Integration...
  * 
  * @author 	vinay.makam-anjaneya@hpe.com 
  * @date 	25-03-2019
