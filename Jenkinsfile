@@ -5,12 +5,12 @@
  * It makes assumptions about plugins being installed, labels mapping to nodes that can build what is needed, etc.
  *
  * This Jenkinsfile incorporates 'Git Flow' workflow for Continuous Integration...
- * 
- * @author 	vinay.makam-anjaneya@hpe.com 
- * @date 	25-03-2019
- * @version 	Initial Commit
- * @copyright 	HPE Confidential
- * 
+ *
+ * @author vinay.makam-anjaneya@hpe.com
+ * @date 25-03-2019
+ * @version Initial Commit
+ * @copyright HPE Confidential
+ *
  * Setup:
  * - Configure the environment variables accordingly
  */
@@ -58,43 +58,62 @@ pipeline {
                     python3 -m venv venv
                     export PATH=${VIRTUAL_ENV}/bin:${PATH}
                     pip install --upgrade pip
-		    pip install -r requirements.txt
+                    pip install -r requirements.txt
                 """
             }
         }
 
-        stage('Lint source') {
+/*        stage('Lint source') {
             steps {
                 sh """
-		   [ -d report ] || mkdir report
-		   export PATH=${VIRTUAL_ENV}/bin:${PATH}
-		   flake8 --exclude=venv* --statistics --ignore=E305, E112, E999
-		"""
+                   [ -d report ] || mkdir report
+                   export PATH=${VIRTUAL_ENV}/bin:${PATH}
+                   flake8 --exclude=venv* --statistics --ignore=E305, E112, E999
+                """
+            }
+        }*/
+
+/*        stage('Unit tests') {
+            steps {
+                sh """
+                   export PATH=${VIRTUAL_ENV}/bin:${PATH}
+                   pytest --cov=src --verbose --html=report.html --self-contained-html
+                   pytest ./src --alluredir=report/allure-results
+		 """
+            }
+        }*/
+/*        stage('reports') {
+            steps {
+                script {
+                    allure([
+                            includeProperties: false,
+                            jdk              : '',
+                            properties       : [],
+                            reportBuildPolicy: 'ALWAYS',
+                            results          : [[path: 'report/allure-report']]
+                    ])
+                }
+            }
+        }*/
+
+        stage('Coverity') {
+            steps {
+                withCoverityEnv('Cov-Analysis') {
+		    sh "echo 'Coverity Analysis tool'"
+		    sh "echo "'configuring coverity analysis compilers before run...'"
+		    sh "cov-configure --python"
+			
+	            sh "echo 'building project using cov-build ...'"
+                    sh "cov-build --dir idir --fs-capture-search ${WORKSPACE}/src --no-command"
+	            
+		    sh "echo 'analyzing project code using cov-analyze ...'"
+                    sh "cov-analyze --dir idir --all"
+		    sh "echo 'completed analyzing project code ...'"
+			
+		    sh "echo 'publishing coverity analysis report ...'"
+                    sh "cov-commit-defects --dir idir --host ${COVERITY_HOST} --port ${COVERITY_PORT} --stream ${COVERITY_STREAM} --user ${COVERITY_USER} --password ${COVERITY_USER}"
+                }
             }
         }
-
-        stage('Unit tests') {
-            steps {
-                sh """
-		   export PATH=${VIRTUAL_ENV}/bin:${PATH}
-		   pytest --cov=src --verbose --html=report.html --self-contained-html 
-		   pytest ./src --alluredir=report/allure-results
-		"""
-            }
-        }  
-stage('reports') {
-    steps {
-    script {
-            allure([
-                    includeProperties: false,
-                    jdk: '',
-                    properties: [],
-                    reportBuildPolicy: 'ALWAYS',
-                    results: [[path: 'report/allure-report']]
-            ])
-    }
-    }
-}	    
-	    
     }
 }
