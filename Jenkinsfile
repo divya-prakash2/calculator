@@ -76,7 +76,7 @@ pipeline {
             steps {
                 sh """
 		   export PATH=${VIRTUAL_ENV}/bin:${PATH}
-		   pytest --html=report.html --css=highcontrast.css --css=accessible.css
+		   pytest --html=report.html --self-contained-html
 		"""
             }
         }
