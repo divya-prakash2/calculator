@@ -76,7 +76,7 @@ pipeline {
             steps {
                 sh """
 		   export PATH=${VIRTUAL_ENV}/bin:${PATH}
-		   pytest -vs --cov=calculator
+		   pytest -vs --cov=calculator --html=report.html --self-contained-html --alluredir=report
 		"""
             }
         }
