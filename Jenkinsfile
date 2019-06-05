@@ -80,7 +80,6 @@ pipeline {
 		   pytest --cov=src --verbose --html=report.html --self-contained-html 
 		   py.test --alluredir=report/allure-results ./src
 		   python3 -m allure serve /report/allure-results
-		   py.test --allure-dir=report/allure-results ./src/calculator.py
 		"""
             }
         }
