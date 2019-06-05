@@ -66,7 +66,7 @@ pipeline {
         stage('Lint source') {
             steps {
                 sh """
-		   [ -d reports ] || mkdir reports
+		   [ -d report ] || mkdir report
 		   export PATH=${VIRTUAL_ENV}/bin:${PATH}
 		   flake8 --exclude=venv* --statistics --ignore=E305, E112, E999
 		"""
@@ -78,7 +78,7 @@ pipeline {
                 sh """
 		   export PATH=${VIRTUAL_ENV}/bin:${PATH}
 		   pytest --cov=src --verbose --html=report.html --self-contained-html 
-		   py.test --alluredir=reports/allure-results ./src
+		   py.test --alluredir=report/allure-report ./src
 		"""
             }
         }
@@ -91,7 +91,7 @@ pipeline {
 			    jdk: '',
 			    properties: [],
 			    reportBuildPolicy: 'ALWAYS',
-			    results: [[path: 'reports/allure-results']]
+			    results: [[path: 'report/allure-report']]
 		    ])
 	    }
     }
