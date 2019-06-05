@@ -77,6 +77,7 @@ pipeline {
                 sh """
 		   export PATH=${VIRTUAL_ENV}/bin:${PATH}
 		   pytest --html=report.html --self-contained-html
+		   pytest --cov=src --verbose
 		"""
             }
         }
