@@ -78,10 +78,27 @@ pipeline {
                 sh """
 		   export PATH=${VIRTUAL_ENV}/bin:${PATH}
 		   pytest --cov=src --verbose --html=report.html --self-contained-html 
-		   py.test --alluredir=report/ ./src
-		   python3 -m allure serve /report
+		   py.test --alluredir=report/allure-results ./src
+		   python3 -m allure serve /report/allure-results
+		   py.test --allure-dir=report/allure-results ./src/calculator.py
 		"""
             }
         }
+	    
+	stage('reports') {
+	    steps {
+	    script {
+		    allure([
+			    includeProperties: false,
+			    jdk: '',
+			    properties: [],
+			    reportBuildPolicy: 'ALWAYS',
+			    results: [[path: 'reports/allure-results']]
+		    ])
+	    }
+    }
+}
+	    
+	    
     }
 }
