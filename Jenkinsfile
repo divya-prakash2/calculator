@@ -111,7 +111,8 @@ pipeline {
 		    sh "echo 'completed analyzing project code ...'"
 			
 		    sh "echo 'publishing coverity analysis report ...'"
-                    sh "cov-commit-defects --dir idir --host ${COVERITY_HOST} --port ${COVERITY_PORT} --stream ${COVERITY_STREAM} --user ${COVERITY_USER} --password ${COVERITY_USER}"
+		    sh "cov-format-errors --dir idir --html-output ${WORKSPACE}/report
+                    //sh "cov-commit-defects --dir idir --host ${COVERITY_HOST} --port ${COVERITY_PORT} --stream ${COVERITY_STREAM} --user ${COVERITY_USER} --password ${COVERITY_USER}"
                 }
             }
         }
