@@ -78,7 +78,7 @@ pipeline {
                 sh """
 		   export PATH=${VIRTUAL_ENV}/bin:${PATH}
 		   pytest --cov=src --verbose --html=report.html --self-contained-html 
-		   py.test --alluredir=report/allure-report ./src
+		   pytest ./src --alluredir=report/allure-report
 		"""
             }
         }
