@@ -66,7 +66,7 @@ pipeline {
         stage('Lint source') {
             steps {
                 sh """
-		   [ -d report ] || mkdir report
+		   [ -d report ] || mkdir reports
 		   export PATH=${VIRTUAL_ENV}/bin:${PATH}
 		   flake8 --exclude=venv* --statistics --ignore=E305, E112, E999
 		"""
