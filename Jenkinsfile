@@ -100,7 +100,7 @@ pipeline {
             steps {
                 withCoverityEnv('Cov-Analysis') {
 		    sh "echo 'Coverity Analysis tool'"
-		    sh "echo "'configuring coverity analysis compilers before run...'"
+		    sh "echo 'configuring coverity analysis compilers before run...'"
 		    sh "cov-configure --python"
 			
 	            sh "echo 'building project using cov-build ...'"
