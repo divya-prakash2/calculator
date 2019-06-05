@@ -80,30 +80,5 @@ pipeline {
 		"""
             }
         }
-
-        stage('Static Code Coverage') {
-            steps {
-                withCoverityEnv('Cov-Analysis') {
-                    sh "cov-build --dir idir --fs-capture-search ${WORKSPACE}/src --no-command"
-                    sh "cov-analyze --dir idir"
-                    sh "cov-commit-defects --dir idir --host ${COVERITY_HOST} --port ${COVERITY_PORT} --stream ${COVERITY_STREAM} --user ${COVERITY_USER} --password ${COVERITY_USER}"
-                }
-            }
-        }
-        
-        stage('Morpheus') {
-            steps {
-                sh """
-                  pwsh -command '/jenkins/MorpheusScript/Test.ps1 Vinay'
-                 cp /opt/download/HPEBIOSCmdlets.msi $WORKSPACE
-               """
-            }
-        }
-        
-        stage('Archive Artifacts') {
-            steps {
-                  archiveArtifacts 'HPEBIOSCmdlets.msi' 
-            }
-        }
     }
 }
