@@ -91,7 +91,7 @@ stage('reports') {
                     jdk: '',
                     properties: [],
                     reportBuildPolicy: 'ALWAYS',
-                    results: [[path: 'report/allure-results']]
+                    results: [[path: './allure-results']]
             ])
     }
     }
