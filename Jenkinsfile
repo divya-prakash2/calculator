@@ -27,12 +27,7 @@ pipeline {
                 logRotator(numToKeepStr: '5'))
     }
 
-    environment {
-        REPO_URL = 'git@github.hpe.com:vinay-makam-anjaneya/calculatorlibrary.git'
-	    
-	//http_proxy = 'http://web-proxy.houston.hpecorp.net:8080'
-	//https_proxy = 'http://web-proxy.houston.hpecorp.net:8080'
-	    
+    environment {   
         // Your GitHub Repository
         DEVELOP_BRANCH = 'develop' // Your Development Branch
         PROJECT_NAME = 'CalculatorLibrary'
