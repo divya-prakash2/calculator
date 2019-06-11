@@ -57,8 +57,6 @@ pipeline {
                     [ -d venv ] && rm -rf venv
                     python3.6 -m venv venv
                     export PATH=${VIRTUAL_ENV}/bin:${PATH}
-		   // pip install --upgrade pip --proxy='http://web-proxy.houston.hpecorp.net:8080'
-                   // pip install -r 'requirements.txt' --proxy='http://web-proxy.houston.hpecorp.net:8080'
                 """
             }
         }
