@@ -32,8 +32,8 @@ pipeline {
         // Your GitHub Repository
         DEVELOP_BRANCH = 'develop' // Your Development Branch
         PROJECT_NAME = 'CalculatorLibrary'
-        COVERITY_HOST = '15.146.44.13'
-        COVERITY_PORT = '9090'
+        COVERITY_HOST = '16.78.28.140'
+        COVERITY_PORT = '8000'
         COVERITY_STREAM = 'fast-data'
         COVERITY_USER = 'admin'
         COVERITY_PASS = 'admin'
