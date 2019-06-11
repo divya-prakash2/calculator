@@ -30,8 +30,9 @@ pipeline {
     environment {
         REPO_URL = 'git@github.hpe.com:vinay-makam-anjaneya/calculatorlibrary.git'
 	    
-	 http_proxy = 'http://web-proxy.houston.hpecorp.net:8080'
-	 https_proxy = 'http://web-proxy.houston.hpecorp.net:8080'
+	//http_proxy = 'http://web-proxy.houston.hpecorp.net:8080'
+	//https_proxy = 'http://web-proxy.houston.hpecorp.net:8080'
+	    
         // Your GitHub Repository
         DEVELOP_BRANCH = 'develop' // Your Development Branch
         PROJECT_NAME = 'CalculatorLibrary'
@@ -99,7 +100,7 @@ pipeline {
             }
         }*/
 
-        stage('Coverity') {
+       /* stage('Coverity') {
             steps {
                 withCoverityEnv('Cov-Analysis') {
 		    sh "echo 'Coverity Analysis tool'"
@@ -118,6 +119,6 @@ pipeline {
                     sh "cov-commit-defects --dir idir --host ${COVERITY_HOST} --port ${COVERITY_PORT} --stream ${COVERITY_STREAM} --user ${COVERITY_USER} --password ${COVERITY_USER}"
                 }
             }
-        }
+        } */
     }
 }
