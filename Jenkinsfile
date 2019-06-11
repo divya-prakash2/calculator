@@ -56,8 +56,8 @@ pipeline {
         stage('Preparation') {
             steps {
                 sh """
-		    echo ${http_proxy}
-		    echo ${https_proxy}
+		    echo $http_proxy
+		    echo $https_proxy
                     echo ${SHELL}
                     [ -d venv ] && rm -rf venv
                     python3.6 -m venv venv
