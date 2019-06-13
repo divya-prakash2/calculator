@@ -95,7 +95,7 @@ pipeline {
             }
         }*/
 
-       /* stage('Coverity') {
+        stage('Coverity') {
             steps {
                 withCoverityEnv('Cov-Analysis') {
 		    sh "echo 'Coverity Analysis tool'"
@@ -109,11 +109,14 @@ pipeline {
                     sh "cov-analyze --dir idir --all"
 		    sh "echo 'completed analyzing project code ...'"
 			
-		    sh "echo 'publishing coverity analysis report ...'"
-		    sh "cov-format-errors --dir idir --html-output ${WORKSPACE}/coverity"
-                    sh "cov-commit-defects --dir idir --host ${COVERITY_HOST} --port ${COVERITY_PORT} --stream ${COVERITY_STREAM} --user ${COVERITY_USER} --password ${COVERITY_USER}"
+                    sh "echo 'commit defects ...'"
+                    withEnv(["http_proxy=''", "https_proxy=''"]) {
+                        println http_proxy
+                        sh "cov-commit-defects --dir idir --host localhost --dataport 9090 --stream fast-data --user 'vinaymakam' --password 'hpeinfosight0!'"
+                    }		
+
                 }
             }
-        } */
+        } 
     }
 }
