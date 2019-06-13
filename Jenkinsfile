@@ -110,10 +110,10 @@ pipeline {
 		    sh "echo 'completed analyzing project code ...'"
 			
                     sh "echo 'commit defects ...'"
-                    withEnv(["http_proxy=''", "https_proxy=''"]) {
-                        println http_proxy
+               //     withEnv(["http_proxy=''", "https_proxy=''"]) {
+               //         println http_proxy
                         sh "cov-commit-defects --dir idir --host localhost --dataport 9090 --stream fast-data --user 'vinaymakam' --password 'hpeinfosight0!'"
-                    }		
+               //     }		
 
                 }
             }
