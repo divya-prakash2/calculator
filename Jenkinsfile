@@ -92,7 +92,7 @@ pipeline {
                     withEnv(["http_proxy=''", "https_proxy=''"]) {
 			println http_proxy
 			println https_proxy
-			sh "cov-commit-defects --dir idir --host localhost --dataport ${COVERITY_PORT} --stream ${COVERITY_STREAM} --user ${COVERITY_USER} --password ${COVERITY_USER}"
+			sh "cov-commit-defects --dir idir --host localhost --dataport ${COVERITY_PORT} --stream ${COVERITY_STREAM} --user ${COVERITY_USER} --password ${COVERITY_PASS}"
                     }						
                 }
             }
