@@ -1,4 +1,3 @@
-// Declarative pipeline must be enclosed within a pipeline block
 pipeline {
 
     // agent section specifies where the entire Pipeline will execute in the Jenkins environment
@@ -6,7 +5,7 @@ pipeline {
 
     options {
         buildDiscarder(
-                // Only keep the 10 most recent builds
+                // Only keep the 05 most recent builds
                 logRotator(numToKeepStr: '5'))
     }
 
@@ -42,9 +41,19 @@ pipeline {
                     python3 -m venv venv
                     export PATH=${VIRTUAL_ENV}/bin:${PATH}
                     pip install --upgrade pip
-		    pip install -r requirements.txt
+					pip install -r requirements.txt
                 """
             }
         }
+		
+		stage('Coverity') {
+            steps {
+                    sh "echo 'commit defects ...'"
+                    withEnv(["http_proxy=''", "https_proxy=''"]) {
+                        println http_proxy
+						println https_proxy
+                    }	
+            }
+        }		
     }
 }
