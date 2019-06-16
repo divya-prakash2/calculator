@@ -36,8 +36,8 @@ pipeline {
         COVERITY_HOST = '15.146.44.13'
         COVERITY_PORT = '9090'
         COVERITY_STREAM = 'fast-data'
-        COVERITY_USER = 'user'
-        COVERITY_PASS = 'x'
+        COVERITY_USER = 'vinaymakam'
+        COVERITY_PASS = 'hpeinfosight0!'
 
         EMAIL_TO = 'vinay.makam-anjaneya@hpe.com'
         EMAIL_FROM = 'vinay.makam-anjaneya@hpe.com'
