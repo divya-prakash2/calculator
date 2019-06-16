@@ -67,31 +67,31 @@ pipeline {
         stage('Lint source') {
             steps {
                 sh """
-				   export PATH=${VIRTUAL_ENV}/bin:${PATH}
-				   flake8 --exclude=venv* --statistics --ignore=E305, E112, E999
-				"""
+		   export PATH=${VIRTUAL_ENV}/bin:${PATH}
+		   flake8 --exclude=venv* --statistics --ignore=E305, E112, E999
+		"""
             }
         }
 
         stage('Unit tests') {
             steps {
                 sh """
-				   export PATH=${VIRTUAL_ENV}/bin:${PATH}
-				   pytest -vs --cov=calculator
-				"""
+		   export PATH=${VIRTUAL_ENV}/bin:${PATH}
+		   pytest -vs --cov=calculator
+		"""
             }
         }
 
         stage('Static Code Coverage') {
             steps {
-                withCoverityEnv('Cov-Connect') {
+                withCoverityEnv('Cov-Analysis') {
                     sh "cov-build --dir idir --fs-capture-search ${WORKSPACE}/src --no-command | tee coverity-build.log || true "			
                     sh "cov-analyze --dir idir | tee coverity-analysis.log || true "
 
                     sh "echo 'commit defects ...'"
                     withEnv(["http_proxy=''", "https_proxy=''"]) {
-                        println http_proxy
-						println https_proxy
+			println http_proxy
+			println https_proxy
                     }						
                 }
             }
