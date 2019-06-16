@@ -84,7 +84,7 @@ pipeline {
 
         stage('Static Code Coverage') {
             steps {
-                //withCoverityEnv('Cov-Analysis') {
+                withCoverityEnv('Cov-Analysis') {
                     sh "cov-build --dir idir --fs-capture-search ${WORKSPACE}/src --no-command | tee coverity-build.log || true "			
                     sh "cov-analyze --dir idir | tee coverity-analysis.log || true "
 
@@ -94,7 +94,7 @@ pipeline {
 		    //println https_proxy
 			sh "cov-commit-defects --dir idir --host localhost --dataport ${COVERITY_PORT} --stream ${COVERITY_STREAM} --user ${COVERITY_USER} --password ${COVERITY_PASS}"
                     //}						
-                //}
+                }
             }
         }
         
