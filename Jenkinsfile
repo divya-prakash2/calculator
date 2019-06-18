@@ -30,8 +30,8 @@ pipeline {
 		disableConcurrentBuilds()
 		skipStagesAfterUnstable()
 		parallelsAlwaysFailFast()
-		ansiColor('xterm')
-		timeout(time: 120, unit: 'MINUTES')
+		//ansiColor('xterm')
+		timeout(time: 30, unit: 'MINUTES')
 		timestamps()
     }
 
