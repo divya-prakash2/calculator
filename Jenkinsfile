@@ -22,16 +22,17 @@ pipeline {
     agent any
 
     options {
+	    
+        buildDiscarder(
+                // Only keep the 05 most recent builds
+                logRotator(numToKeepStr: '05'))
 	skipDefaultCheckout()
         disableConcurrentBuilds()
         skipStagesAfterUnstable()
         parallelsAlwaysFailFast()
         ansiColor('xterm')
         timeout(time: 120, unit: 'MINUTES')
-        timestamps()	    
-        buildDiscarder(
-                // Only keep the 05 most recent builds
-                logRotator(numToKeepStr: '05'))
+        timestamps()
     }
 
     environment {
