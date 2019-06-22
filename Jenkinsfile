@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Pull-Request') {
 		    when { 
-			  expression { BRANCH_NAME ==~ /PR-\/.*|feature\/.*|bugfix\/.*/ }
+			    expression { BRANCH_NAME ==~ /master|PR-\/.*|feature\/.*|bugfix\/.*/ }
 			}
             steps {
 		 echo "$BRANCH_NAME"
