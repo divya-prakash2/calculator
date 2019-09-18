@@ -143,7 +143,6 @@ pipeline {
             }
         }
     }
-}
 
 def NotifyBuild(String BuildStatus) {
     // build status of null means successful
