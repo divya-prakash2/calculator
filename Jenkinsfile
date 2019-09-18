@@ -58,7 +58,6 @@ pipeline {
          * wrapped in one or more stage directives
          */
         stage('Preparation') {
-            when { changeRequest() }
             /**
              * steps section defines a series of one or more steps to be executed in a given
              * stage directive
@@ -84,7 +83,6 @@ pipeline {
         }
         
         stage('Pylint') {
-            when { changeRequest() }
             steps {
                 sh """
 		    export PATH=${VIRTUAL_ENV}/bin:${PATH}
@@ -94,7 +92,6 @@ pipeline {
         }
 
         stage('Unit tests') {
-            when { changeRequest() }
             steps {
                 sh """
                     export PATH=${VIRTUAL_ENV}/bin:${PATH}
@@ -108,7 +105,6 @@ pipeline {
         }
 
         stage('Coverity') {
-            when { changeRequest() }
             steps {
 
                 withCoverityEnv('Cov-Analysis') {
