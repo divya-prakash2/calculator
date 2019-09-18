@@ -1,6 +1,5 @@
 """
 Unit tests for the calculator library
-Tests changes
 """
 
 import calculator
