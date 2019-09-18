@@ -68,6 +68,8 @@ pipeline {
                     [ -d venv ] && rm -rf venv
                     python3.6 -m venv venv
                     export PATH=${VIRTUAL_ENV}/bin:${PATH}
+		    pip install --upgrade pip
+		    pip install -r requirements.txt
                 """
             }
         }
@@ -104,7 +106,7 @@ pipeline {
 
         }
 
-        stage('Coverity') {
+       /* stage('Coverity') {
             steps {
 
                 withCoverityEnv('Cov-Analysis') {
@@ -129,7 +131,7 @@ pipeline {
                     }
                 }
             }
-        }
+        }*/
     }
     /**
      * post section defines actions which will be run at the end of the Pipeline run or stage
