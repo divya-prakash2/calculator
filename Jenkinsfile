@@ -121,10 +121,10 @@ pipeline {
                     // Commit the defects to Coverity Connect Server
                     sh "echo 'completed analyzing project code ...'"
                     sh "echo 'publishing coverity analysis report to ${COVERITY_HOST} ...'"
-                    sh "echo 'using [stream] ${COVERITY_STREAM}'"
+                    // sh "echo 'using [stream] ${COVERITY_STREAM}'"
                     withEnv(["no_proxy='jencov.us.rdlabs.hpecorp.net'"]) {
                         sh "cov-commit-defects --dir idir --host ${COVERITY_HOST} " +
-                                "--dataport ${COVERITY_PORT} --stream ${COVERITY_STREAM} " +
+                       //         "--dataport ${COVERITY_PORT} --stream ${COVERITY_STREAM} " +
                                 "--user ${COVERITY_USR} --password ${COVERITY_PSW}"
                     }
                 }
