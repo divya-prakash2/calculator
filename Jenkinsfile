@@ -138,14 +138,6 @@ pipeline {
     post {
         always {
             script {
-                allure([
-                        includeProperties: false,
-                        jdk              : '',
-                        properties       : [],
-                        reportBuildPolicy: 'ALWAYS',
-                        results          : [[path: '${WORKSPACE}/allure-results']]
-                ])
-                if (env.BRANCH_NAME.startsWith('PR')) {
                     NotifyBuild(currentBuild.result)
                 }
             }
