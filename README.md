@@ -1,2 +1,3 @@
 # calculatorlibrary
+HACKATHON - SPARK TEAM
 
