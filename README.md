@@ -1,3 +1,2 @@
 # calculatorlibrary
 HACKATHON - SPARK TEAM
-MOVING FROM DEVELO
